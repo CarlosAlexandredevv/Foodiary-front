@@ -23,15 +23,15 @@ export default function SignIn() {
 
             <View className="p-5 w-full mt-6">
               <Link href="/signup" asChild>
-                <Button className="w-full">
-                  Criar conta
-                </Button>
+                <Button className="w-full">Criar conta</Button>
               </Link>
 
               <View className="mt-[30px] flex-row items-center gap-2 justify-center">
-                <Text className="text-white font-sans-regular text-base">Já tem conta?</Text>
+                <Text className="text-white font-sans-regular text-base">
+                  Já tem conta?
+                </Text>
                 <Link href="/signin">
-                  <Text className="text-lime-500 font-sans-medium text-base">
+                  <Text className="text-purple-500 font-sans-medium text-base">
                     Acesse agora!
                   </Text>
                 </Link>

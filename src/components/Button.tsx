@@ -21,7 +21,7 @@ export function Button({
   const childEl = !isChildrenString ? (
     children
   ) : (
-    <Text className="text-base font-sans-medium">{children}</Text>
+    <Text className="text-base font-sans-medium text-white">{children}</Text>
   );
 
   return (
@@ -29,9 +29,9 @@ export function Button({
       <Pressable
         className={cn(
           'items-center justify-center ios:active:opacity-85 disabled:opacity-40',
-          color === 'default' && 'bg-lime-500',
+          color === 'default' && 'bg-purple-500',
           color === 'gray' && 'bg-gray-300',
-          color === 'dark' && 'bg-lime-500/5',
+          color === 'dark' && 'bg-purple-500/5',
           size === 'default' && 'px-6 py-3.5 min-h-[52px]',
           size === 'icon' && 'size-12',
           className,

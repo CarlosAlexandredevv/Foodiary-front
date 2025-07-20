@@ -24,7 +24,7 @@ export function OptionsSelector({
           key={option.value}
           className={cn(
             'border border-gray-500 rounded-2xl py-3 px-4 flex-row gap-4 items-center',
-            value === option.value && 'bg-lime-700/10 border-lime-700',
+            value === option.value && 'bg-purple-700/10 border-purple-700',
           )}
           onPress={() => onChange?.(option.value)}
         >

@@ -15,7 +15,7 @@ interface ICameraModalProps {
 export function CameraModal({ onClose, open }: ICameraModalProps) {
   const [photoUri, setPhotoUri] = useState<string | null>(null);
   const [permission, requestPermission] = useCameraPermissions();
-  
+
   const cameraRef = useRef<CameraView>(null);
 
   function handleCloseModal() {
@@ -59,9 +59,7 @@ export function CameraModal({ onClose, open }: ICameraModalProps) {
             <Text className="text-white text-center px-10 text-base font-sans-regular mb-4">
               Precisamos de permissão para acessar a câmera!
             </Text>
-            <Button onPress={requestPermission}>
-              Dar permissão
-            </Button>
+            <Button onPress={requestPermission}>Dar permissão</Button>
           </View>
         )}
 
@@ -74,9 +72,7 @@ export function CameraModal({ onClose, open }: ICameraModalProps) {
                 </Button>
               </View>
 
-              {!photoUri && (
-                <CameraView ref={cameraRef} style={{ flex: 1 }} />
-              )}
+              {!photoUri && <CameraView ref={cameraRef} style={{ flex: 1 }} />}
 
               {photoUri && (
                 <Image
@@ -89,12 +85,18 @@ export function CameraModal({ onClose, open }: ICameraModalProps) {
               {!photoUri && (
                 <View className="p-5 pt-6 items-center gap-2 pb-12">
                   <View className="flex-row">
-                    <Button size="icon" color="dark" onPress={handleTakePicture}>
-                      <CameraIcon size={20} color={colors.lime[600]} />
+                    <Button
+                      size="icon"
+                      color="dark"
+                      onPress={handleTakePicture}
+                    >
+                      <CameraIcon size={20} color={colors.purple[600]} />
                     </Button>
                   </View>
 
-                  <Text className="text-gray-100 text-base font-sans-regular">Tirar foto</Text>
+                  <Text className="text-gray-100 text-base font-sans-regular">
+                    Tirar foto
+                  </Text>
                 </View>
               )}
 

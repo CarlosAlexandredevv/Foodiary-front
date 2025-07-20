@@ -1,61 +1,52 @@
 import { Controller, useFormContext } from 'react-hook-form';
-import { View } from 'react-native';
-import { Input } from '../Input';
+import { OptionsSelector } from '../OptionsSelector';
 import { SignUpFormData } from './signUpSchema';
 
-export function AccountStep() {
-  const { control } = useFormContext<SignUpFormData>();
+export function ActivityLevelStep() {
+  const form = useFormContext<SignUpFormData>();
 
   return (
-    <View className="gap-4">
-      <Controller
-        control={control}
-        name="name"
-        render={({ field, fieldState }) => (
-          <Input
-            label="Nome completo"
-            placeholder="Digite seu nome"
-            value={field.value}
-            onChangeText={field.onChange}
-            error={fieldState.error?.message}
-            autoCapitalize="words"
-          />
-        )}
-      />
-
-      <Controller
-        control={control}
-        name="email"
-        render={({ field, fieldState }) => (
-          <Input
-            label="Email"
-            placeholder="Digite seu email"
-            value={field.value}
-            onChangeText={field.onChange}
-            error={fieldState.error?.message}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            autoCorrect={false}
-          />
-        )}
-      />
-
-      <Controller
-        control={control}
-        name="password"
-        render={({ field, fieldState }) => (
-          <Input
-            label="Senha"
-            placeholder="Digite sua senha (min. 8 caracteres)"
-            value={field.value}
-            onChangeText={field.onChange}
-            error={fieldState.error?.message}
-            secureTextEntry
-            autoCapitalize="none"
-            autoCorrect={false}
-          />
-        )}
-      />
-    </View>
+    <Controller
+      control={form.control}
+      name="activityLevel"
+      render={({ field }) => (
+        <OptionsSelector
+          value={field.value?.toString()}
+          onChange={(value) => field.onChange(Number(value))}
+          options={[
+            {
+              icon: '🛋️',
+              title: 'Sedentário',
+              description: 'Pouca ou nenhuma atividade física',
+              value: '1',
+            },
+            {
+              icon: '🚶',
+              title: 'Leve',
+              description: 'Exercício leve 1-3 dias por semana',
+              value: '2',
+            },
+            {
+              icon: '🏃',
+              title: 'Moderado',
+              description: 'Exercício moderado 3-5 dias por semana',
+              value: '3',
+            },
+            {
+              icon: '🏋️',
+              title: 'Pesado',
+              description: 'Exercício pesado 6-7 dias por semana',
+              value: '4',
+            },
+            {
+              icon: '🏆',
+              title: 'Atleta',
+              description: 'Exercício muito pesado, trabalho físico',
+              value: '5',
+            },
+          ]}
+        />
+      )}
+    />
   );
 }

@@ -1,6 +1,21 @@
-import { AudioModule, RecordingPresets, setAudioModeAsync, useAudioPlayer, useAudioRecorder, useAudioRecorderState } from 'expo-audio';
+import {
+  AudioModule,
+  RecordingPresets,
+  setAudioModeAsync,
+  useAudioPlayer,
+  useAudioRecorder,
+  useAudioRecorderState,
+} from 'expo-audio';
 import { StatusBar } from 'expo-status-bar';
-import { CheckIcon, MicIcon, PauseIcon, PlayIcon, SquareIcon, Trash2Icon, XIcon } from 'lucide-react-native';
+import {
+  CheckIcon,
+  MicIcon,
+  PauseIcon,
+  PlayIcon,
+  SquareIcon,
+  Trash2Icon,
+  XIcon,
+} from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import { Alert, Modal, Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
@@ -78,13 +93,13 @@ export function AudioModal({ onClose, open }: IAudioModalProps) {
                 <View
                   className={cn(
                     'size-[227px] border border-gray-700/50 rounded-full items-center justify-center',
-                    isRecording && 'border-lime-600/50',
+                    isRecording && 'border-purple-600/50',
                   )}
                 >
                   <View
                     className={cn(
                       'size-[179px] bg-gray-700/10 rounded-full',
-                      isRecording && 'bg-lime-600/10',
+                      isRecording && 'bg-purple-600/10',
                     )}
                   />
                 </View>
@@ -99,14 +114,22 @@ export function AudioModal({ onClose, open }: IAudioModalProps) {
               <View className="p-5 pt-6 items-center gap-2 pb-20">
                 <View className="flex-row">
                   {!isRecording && (
-                    <Button size="icon" color="dark" onPress={handleStartRecording}>
-                      <MicIcon size={20} color={colors.lime[600]} />
+                    <Button
+                      size="icon"
+                      color="dark"
+                      onPress={handleStartRecording}
+                    >
+                      <MicIcon size={20} color={colors.purple[600]} />
                     </Button>
                   )}
 
                   {isRecording && (
-                    <Button size="icon" color="dark" onPress={handleStopRecording}>
-                      <SquareIcon size={20} color={colors.gray[500]}  />
+                    <Button
+                      size="icon"
+                      color="dark"
+                      onPress={handleStopRecording}
+                    >
+                      <SquareIcon size={20} color={colors.gray[500]} />
                     </Button>
                   )}
                 </View>
@@ -124,13 +147,21 @@ export function AudioModal({ onClose, open }: IAudioModalProps) {
                 </Button>
 
                 {!player.playing && (
-                  <Button size="icon" color="dark" onPress={() => player.play()}>
-                    <PlayIcon size={20} color={colors.lime[600]} />
+                  <Button
+                    size="icon"
+                    color="dark"
+                    onPress={() => player.play()}
+                  >
+                    <PlayIcon size={20} color={colors.purple[600]} />
                   </Button>
                 )}
                 {player.playing && (
-                  <Button size="icon" color="dark" onPress={() => player.pause()}>
-                    <PauseIcon size={20} color={colors.lime[600]} />
+                  <Button
+                    size="icon"
+                    color="dark"
+                    onPress={() => player.pause()}
+                  >
+                    <PauseIcon size={20} color={colors.purple[600]} />
                   </Button>
                 )}
 
