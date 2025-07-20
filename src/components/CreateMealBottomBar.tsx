@@ -18,19 +18,11 @@ export function CreateMealBottomBar() {
       style={{ height: 80 + bottom }}
     >
       <View className="flex-row mx-auto gap-4 mt-4">
-        <Button
-          size="icon"
-          color="gray"
-          onPress={() => setIsAudioModalOpen(true)}
-        >
+        <Button size="icon" color="gray" onPress={() => setIsAudioModalOpen(true)}>
           <MicIcon />
         </Button>
 
-        <Button
-          size="icon"
-          color="gray"
-          onPress={() => setIsPictureModalOpen(true)}
-        >
+        <Button size="icon" color="gray" onPress={() => setIsPictureModalOpen(true)}>
           <CameraIcon />
         </Button>
       </View>
@@ -39,7 +31,7 @@ export function CreateMealBottomBar() {
         open={isAudioModalOpen}
         onClose={() => setIsAudioModalOpen(false)}
       />
-
+      
       <CameraModal
         open={isPictureModalOpen}
         onClose={() => setIsPictureModalOpen(false)}
