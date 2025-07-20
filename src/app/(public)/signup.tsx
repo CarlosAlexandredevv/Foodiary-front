@@ -6,8 +6,13 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import { AuthLayout } from '../../components/AuthLayout';
 import { Button } from '../../components/Button';
+import { AccountStep } from '../../components/SignUpSteps/AccountStep';
+import { ActivityLevelStep } from '../../components/SignUpSteps/ActivityLevelStep';
+import { BirthDateStep } from '../../components/SignUpSteps/BirthDateStep';
 import { GenderStep } from '../../components/SignUpSteps/GenderStep';
 import { GoalStep } from '../../components/SignUpSteps/GoalStep';
+import { HeightStep } from '../../components/SignUpSteps/HeightStep';
+import { WeightStep } from '../../components/SignUpSteps/WeightStep';
 import { signUpSchema } from '../../components/SignUpSteps/signUpSchema';
 import { colors } from '../../styles/colors';
 
@@ -31,6 +36,36 @@ export default function SignUp() {
       subtitle: 'Seu gênero influencia no tipo da dieta',
       Component: GenderStep,
     },
+    {
+      icon: '📅',
+      title: 'Qual é sua data de nascimento?',
+      subtitle: 'Sua idade ajuda a personalizar sua dieta',
+      Component: BirthDateStep,
+    },
+    {
+      icon: '📏',
+      title: 'Qual é sua altura?',
+      subtitle: 'Sua altura é importante para o cálculo do IMC',
+      Component: HeightStep,
+    },
+    {
+      icon: '⚖️',
+      title: 'Qual é seu peso atual?',
+      subtitle: 'Seu peso atual nos ajuda a criar sua dieta',
+      Component: WeightStep,
+    },
+    {
+      icon: '🏃',
+      title: 'Qual é seu nível de atividade?',
+      subtitle: 'Isso nos ajuda a calcular suas necessidades calóricas',
+      Component: ActivityLevelStep,
+    },
+    {
+      icon: '📝',
+      title: 'Crie sua conta',
+      subtitle: 'Finalize seu cadastro para começar sua jornada',
+      Component: AccountStep,
+    },
   ];
 
   function handlePreviousStep() {
@@ -47,6 +82,7 @@ export default function SignUp() {
   }
 
   const currentStep = steps[currentStepIndex];
+  const isLastStep = currentStepIndex === steps.length - 1;
 
   return (
     <AuthLayout
@@ -59,14 +95,20 @@ export default function SignUp() {
           <currentStep.Component />
         </FormProvider>
 
-        <View className="flex-row justify-between">
+        <View className="flex-row justify-between gap-4">
           <Button size="icon" color="gray" onPress={handlePreviousStep}>
             <ArrowLeftIcon size={20} color={colors.black[700]} />
           </Button>
 
-          <Button size="icon" onPress={handleNextStep}>
-            <ArrowRightIcon size={20} color={colors.black[700]} />
-          </Button>
+          {isLastStep ? (
+            <Button className="flex-1" onPress={handleNextStep}>
+              Criar conta
+            </Button>
+          ) : (
+            <Button size="icon" onPress={handleNextStep}>
+              <ArrowRightIcon size={20} color={colors.black[700]} />
+            </Button>
+          )}
         </View>
       </View>
     </AuthLayout>
