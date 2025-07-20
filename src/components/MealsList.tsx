@@ -1,5 +1,6 @@
 import { FlatList, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useAuth } from '../hooks/useAuth';
 import { DailyStats } from './DailyStats';
 import { DateSwitcher } from './DateSwitcher';
 import { MealCard } from './MealCard';
@@ -32,6 +33,8 @@ const meals = [
 ];
 
 function MealsListHeader() {
+  const { user } = useAuth();
+
   return (
     <View>
       <DateSwitcher />
@@ -39,20 +42,20 @@ function MealsListHeader() {
       <View className="mt-2">
         <DailyStats
           calories={{
-            current: 500,
-            goal: 2500,
+            current: 0,
+            goal: user!.calories,
           }}
           proteins={{
-            current: 2000,
-            goal: 2500,
+            current: 0,
+            goal: user!.proteins,
           }}
           carbohydrates={{
-            current: 500,
-            goal: 2500,
+            current: 0,
+            goal: user!.carbohydrates,
           }}
           fats={{
-            current: 500,
-            goal: 2500,
+            current: 0,
+            goal: user!.fats,
           }}
         />
       </View>
@@ -67,27 +70,22 @@ function MealsListHeader() {
 }
 
 function Separator() {
-  return (
-    <View className="h-8" />
-  );
+  return <View className="h-8" />;
 }
 
 export function MealsList() {
   const { bottom } = useSafeAreaInsets();
-  
+
   return (
     <FlatList
       data={meals}
       contentContainerStyle={{ paddingBottom: 80 + bottom + 16 }}
-      keyExtractor={meal => meal.id}
+      keyExtractor={(meal) => meal.id}
       ListHeaderComponent={MealsListHeader}
       ItemSeparatorComponent={Separator}
       renderItem={({ item: meal }) => (
         <View className="mx-5">
-          <MealCard
-            id={meal.id}
-            name={meal.name}
-          />
+          <MealCard id={meal.id} name={meal.name} />
         </View>
       )}
     />

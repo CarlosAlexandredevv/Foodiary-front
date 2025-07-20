@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { isAxiosError } from 'axios';
 import { router } from 'expo-router';
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react-native';
 import { useState } from 'react';
@@ -102,7 +103,9 @@ export default function SignUp() {
         },
       });
     } catch (error) {
-      console.log(error);
+      if (isAxiosError(error)) {
+        console.log(JSON.stringify(error.response?.data, null, 2));
+      }
       Alert.alert('Erro ao criar a conta. Tente novamente.');
     }
   });
@@ -129,7 +132,11 @@ export default function SignUp() {
           </Button>
 
           {isLastStep ? (
-            <Button className="flex-1" onPress={handleSubmit}>
+            <Button
+              className="flex-1"
+              onPress={handleSubmit}
+              loading={form.formState.isSubmitting}
+            >
               Criar conta
             </Button>
           ) : (
