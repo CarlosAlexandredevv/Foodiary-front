@@ -43,7 +43,7 @@ export function OptionsSelector({
             </Text>
 
             {option.description && (
-              <Text className="text-sm font-sans-regular text-gray-700">
+              <Text className="text-xs font-sans-regular text-gray-700">
                 {option.description}
               </Text>
             )}
