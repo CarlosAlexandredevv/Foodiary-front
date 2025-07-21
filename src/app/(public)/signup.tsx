@@ -141,7 +141,7 @@ export default function SignUp() {
             </Button>
           ) : (
             <Button size="icon" onPress={handleNextStep}>
-              <ArrowRightIcon size={20} color={colors.black[700]} />
+              <ArrowRightIcon size={20} color={'#fff'} />
             </Button>
           )}
         </View>
