@@ -3,10 +3,11 @@ import { FlatList, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAuth } from '../hooks/useAuth';
 import { httpClient } from '../services/httpClient';
+import { colors } from '../styles/colors';
 import { DailyStats } from './DailyStats';
 import { DateSwitcher } from './DateSwitcher';
 import { MealCard } from './MealCard';
-
+import { FolderIcon, Utensils } from 'lucide-react-native';
 function MealsListHeader() {
   const { user } = useAuth();
 
@@ -84,7 +85,15 @@ export function MealsList() {
       data={meals}
       contentContainerStyle={{ paddingBottom: 80 + bottom + 16 }}
       keyExtractor={(meal) => meal.id}
-      ListEmptyComponent={<Text>Nenhuma refeição cadastrada...</Text>}
+      ListEmptyComponent={
+        <View className="flex-1 items-center justify-center gap-2">
+          <Utensils size={40} color={colors.gray[500]} />
+
+          <Text className="text-gray-700 text-base font-sans-regular text-center">
+            Nenhuma refeição cadastrada...
+          </Text>
+        </View>
+      }
       ListHeaderComponent={MealsListHeader}
       ItemSeparatorComponent={Separator}
       renderItem={({ item: meal }) => (
