@@ -31,6 +31,7 @@ export default function SignIn() {
   const handleSubmit = form.handleSubmit(async (formData) => {
     try {
       await signIn(formData);
+      router.replace('/(private)');
     } catch (error) {
       console.log(error);
       Alert.alert('Credenciais inválidas!');

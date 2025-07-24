@@ -8,6 +8,8 @@ import { httpClient } from '../services/httpClient';
 import { DailyStats } from './DailyStats';
 import { DateSwitcher } from './DateSwitcher';
 import { MealCard } from './MealCard';
+import { Utensils } from 'lucide-react-native';
+import { colors } from '../styles/colors';
 
 type Meal = {
   name: string;
@@ -46,11 +48,11 @@ function MealsListHeader({
     let fats = 0;
 
     for (const meal of meals) {
-      for (const food of meal.foods) {
-        calories += food.calories;
-        proteins += food.proteins;
-        carbohydrates += food.carbohydrates;
-        fats += food.fats;
+      for (const food of meal?.foods) {
+        calories += food?.calories ?? 0;
+        proteins += food?.proteins ?? 0;
+        carbohydrates += food?.carbohydrates ?? 0;
+        fats += food?.fats ?? 0;
       }
     }
 
@@ -73,20 +75,20 @@ function MealsListHeader({
       <View className="mt-2">
         <DailyStats
           calories={{
-            current: totals.calories,
-            goal: user!.calories,
+            current: totals?.calories,
+            goal: user?.calories!,
           }}
           proteins={{
-            current: totals.proteins,
-            goal: user!.proteins,
+            current: totals?.proteins,
+            goal: user?.proteins!,
           }}
           carbohydrates={{
-            current: totals.carbohydrates,
-            goal: user!.carbohydrates,
+            current: totals?.carbohydrates,
+            goal: user?.carbohydrates!,
           }}
           fats={{
-            current: totals.fats,
-            goal: user!.fats,
+            current: totals?.fats,
+            goal: user?.fats!,
           }}
         />
       </View>
@@ -159,8 +161,15 @@ export function MealsList() {
     <FlatList
       data={meals}
       contentContainerStyle={{ paddingBottom: 80 + bottom + 16 }}
-      keyExtractor={(meal) => meal.id}
-      ListEmptyComponent={<Text>Nenhuma refeição cadastrada...</Text>}
+      keyExtractor={(meal) => meal?.id}
+      ListEmptyComponent={
+        <View className="flex-1 items-center justify-center gap-2">
+          <Utensils size={40} color={colors.gray[500]} />
+          <Text className="text-gray-700 text-base font-sans-regular text-center">
+            Nenhuma refeição cadastrada...
+          </Text>
+        </View>
+      }
       ListHeaderComponent={
         <MealsListHeader
           currentDate={currentDate}
@@ -173,10 +182,10 @@ export function MealsList() {
       renderItem={({ item: meal }) => (
         <View className="mx-5">
           <MealCard
-            id={meal.id}
-            name={meal.name}
-            icon={meal.icon}
-            foods={meal.foods}
+            id={meal?.id}
+            name={meal?.name}
+            icon={meal?.icon}
+            foods={meal?.foods}
             createdAt={new Date(meal.createdAt)}
           />
         </View>

@@ -56,13 +56,11 @@ function RootLayout() {
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Protected guard={isLoggedIn}>
+      {isLoggedIn ? (
         <Stack.Screen name="(private)" />
-      </Stack.Protected>
-
-      <Stack.Protected guard={!isLoggedIn}>
+      ) : (
         <Stack.Screen name="(public)" />
-      </Stack.Protected>
+      )}
     </Stack>
   );
 }

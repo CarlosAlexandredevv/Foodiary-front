@@ -43,7 +43,7 @@ export default function MealDetails() {
 
   if (isFetching || meal?.status !== 'success') {
     return (
-      <View className="bg-lime-700 flex-1 items-center justify-center gap-12">
+      <View className="bg-purple-700 flex-1 items-center justify-center gap-12">
         <Logo width={187} height={60} />
         <ActivityIndicator color="#fff" />
       </View>

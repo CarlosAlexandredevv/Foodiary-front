@@ -1,8 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { createContext, useCallback, useEffect, useState } from 'react';
 
 import { httpClient } from '../services/httpClient';
+import { useRouter } from 'expo-router';
 
 type User = {
   email: string;
@@ -48,7 +49,9 @@ const TOKEN_STORAGE_KEY = process.env.EXPO_PUBLIC_TOKEN_STORAGE_KEY;
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
+  const queryClient = useQueryClient();
   const [isLoadingToken, setIsLoadingToken] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     async function load() {
@@ -101,14 +104,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   });
 
   const signOut = useCallback(async () => {
+    // Limpa token salvo e cabeçalhos
     setToken(null);
     await AsyncStorage.removeItem(TOKEN_STORAGE_KEY!);
-  }, []);
+
+    // Remove todos os dados armazenados em cache (incluindo o usuário)
+    queryClient.clear();
+
+    // Navega para a tela de login substituindo a rota atual
+    router.replace('/signin');
+  }, [queryClient, router]);
 
   return (
     <AuthContext.Provider
       value={{
-        isLoggedIn: !!user,
+        // Consideramos logado se existir token válido
+        isLoggedIn: !!token,
         isLoading: isLoadingToken || isFetching,
         user: user ?? null,
         signIn,
