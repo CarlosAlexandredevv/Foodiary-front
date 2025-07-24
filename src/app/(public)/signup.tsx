@@ -102,6 +102,8 @@ export default function SignUp() {
           password: formData.password,
         },
       });
+
+      router.replace('/(private)');
     } catch (error) {
       if (isAxiosError(error)) {
         console.log(JSON.stringify(error.response?.data, null, 2));

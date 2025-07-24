@@ -82,7 +82,11 @@ export default function SignIn() {
         </View>
 
         <View className="flex-row gap-6">
-          <Button onPress={router.back} size="icon" color="gray">
+          <Button
+            onPress={() => router.replace('/(public)/')}
+            size="icon"
+            color="gray"
+          >
             <ArrowLeftIcon size={20} color={colors.black[700]} />
           </Button>
           <Button
